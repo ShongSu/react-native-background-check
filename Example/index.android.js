@@ -9,26 +9,40 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
 import BackgroundCheckModule from 'react-native-background-check';
 
+const onShowToast = () => {
+  BackgroundCheckModule.alert("Hey! It works!");
+};
+
+const onOpenSettings = () => {
+  BackgroundCheckModule.openSettings();
+};
+
+const onGotoBackground = () => {
+  BackgroundCheckModule.bringApptoBackground();
+};
+
 export default class Example extends Component {
   render() {
-    console.log("BackgroundCheckModule:",BackgroundCheckModule);
-
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
+        <Button title='Show Toast' onPress={onShowToast}/>
         <Text style={styles.instructions}>
           To get started, edit index.android.js
         </Text>
+        <Button title='Open Settings' onPress={onOpenSettings}/>
         <Text style={styles.instructions}>
           Double tap R on your keyboard to reload,{'\n'}
           Shake or press menu button for dev menu
         </Text>
+        <Button title='Go to Background' onPress={onGotoBackground}/>
       </View>
     );
   }
