@@ -16,7 +16,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.shongsu.helloworld.MyTaskService;
+import com.shongsu.backgroundcheck.MyTaskService;
 
 public class BackgroundCheckModule extends ReactContextBaseJavaModule {
 
@@ -35,8 +35,8 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void alertAgain(String message) {
-    Toast.makeText(getReactApplicationContext(), "Fuck off", Toast.LENGTH_LONG).show();
+  public void openSettings() {
+    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
   }
 
   @ReactMethod
@@ -52,9 +52,6 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
 
     final Activity currentActivity = getCurrentActivity();
     Context ctx = getReactApplicationContext();
-
-//    PowerManager powerManager = (PowerManager) currentActivity.getSystemService(Context.POWER_SERVICE);
-//    powerManager.newWakeLock((PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "Loneworker - FULL WAKE LOCK").acquire();
 
     System.out.println("Notification Received========bringApptoForeground==============");
 
@@ -90,6 +87,5 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
       }
     });
   }
-
 
 }
