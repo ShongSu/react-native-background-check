@@ -5,7 +5,7 @@ For Android Only
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Example React Native app](#example-react-native-app)
+- [Example React Native Android App](#example-react-native-android-app)
 - [Questions?](#questions)
 
 ### Installation
@@ -44,4 +44,11 @@ import BackgroundCheckModule from 'react-native-background-check';
 ##### isLocked(errorCallback, successCallback)
 
 
+### Example React Native Android App
 
+Working on it...
+
+
+### Questions?
+
+Feel free to [create an issue](https://github.com/ShongSu/react-native-background-check/issues/new)
