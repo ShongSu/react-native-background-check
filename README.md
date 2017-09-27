@@ -4,7 +4,7 @@ For Android Only
 ### Content
 
 - [Installation](#installation)
-- [Usage](#Usage)
+- [Usage](#usage)
 - [Example React Native app](#example-react-native-app)
 - [Questions?](#questions)
 
