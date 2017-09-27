@@ -27,7 +27,7 @@ public class BackgroundCheckPackage implements ReactPackage {
                               ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
 
-    modules.add(new HelloModule(reactContext));
+    modules.add(new BackgroundCheckModule(reactContext));
 
     return modules;
   }

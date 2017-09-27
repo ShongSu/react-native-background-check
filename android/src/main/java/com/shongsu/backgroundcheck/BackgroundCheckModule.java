@@ -1,22 +1,17 @@
 package com.shongsu.backgroundcheck;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.PowerManager;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.facebook.react.bridge.ActivityEventListener;
-import com.facebook.react.bridge.BaseActivityEventListener;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.shongsu.backgroundcheck.MyTaskService;
 
 public class BackgroundCheckModule extends ReactContextBaseJavaModule {
 
@@ -36,7 +31,8 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void openSettings() {
-    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+    Activity currentActivity = getCurrentActivity();
+    currentActivity.startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
   }
 
   @ReactMethod
