@@ -1,0 +1,5 @@
+rootProject.name = 'Example'
+include ':react-native-background-check'
+project(':react-native-background-check').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-background-check/android')
+
+include ':app'

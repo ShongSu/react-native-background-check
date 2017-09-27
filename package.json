@@ -1,24 +1,11 @@
 {
   "name": "react-native-background-check",
   "version": "1.0.0",
-  "description": "Background check for Android devices",
+  "description": "For Android Only",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ShongSu/react-native-background-check.git"
-  },
-  "keywords": [
-    "React-Native",
-    "Android",
-    "Background"
-  ],
   "author": "Shongsu",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ShongSu/react-native-background-check/issues"
-  },
-  "homepage": "https://github.com/ShongSu/react-native-background-check#readme"
+  "license": "MIT"
 }
