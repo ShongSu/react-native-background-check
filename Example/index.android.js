@@ -26,6 +26,14 @@ const onGotoBackground = () => {
   BackgroundCheckModule.bringApptoBackground();
 };
 
+const onIsLocked = () => {
+  BackgroundCheckModule.isLocked((msg) => {
+    console.log(msg);
+  }, (isLocked) => {
+    console.log(isLocked);
+  });
+};
+
 export default class Example extends Component {
   render() {
     return (
@@ -43,6 +51,8 @@ export default class Example extends Component {
           Shake or press menu button for dev menu
         </Text>
         <Button title='Go to Background' onPress={onGotoBackground}/>
+        <Button title='Is Locked ?' onPress={onIsLocked}/>
+
       </View>
     );
   }

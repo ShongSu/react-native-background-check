@@ -1,17 +1,21 @@
 package com.shongsu.backgroundcheck;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.uimanager.IllegalViewOperationException;
 
 public class BackgroundCheckModule extends ReactContextBaseJavaModule {
 
@@ -45,15 +49,9 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void bringApptoForeground() {
-
-    final Activity currentActivity = getCurrentActivity();
+    Activity currentActivity = getCurrentActivity();
     Context ctx = getReactApplicationContext();
-
-    System.out.println("Notification Received========bringApptoForeground==============");
-
-    lightScreen();
-
-
+    this.lightScreen();
     Intent intent = new Intent(ctx, currentActivity.getClass());
     intent.setAction(Intent.ACTION_MAIN);
     intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -66,10 +64,7 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void lightScreen() {
-    System.out.println("Notification Received========lightScreen==============");
-
     final Activity currentActivity = getCurrentActivity();
-
     currentActivity.runOnUiThread(new Runnable() {
       @Override
       public void run() {
@@ -82,5 +77,19 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
         window.addFlags(flags);
       }
     });
+  }
+
+  @ReactMethod
+  public void isLocked(Callback errorCallback, Callback successCallback) {
+    try {
+      Activity currentActivity = getCurrentActivity();
+      Context context = currentActivity.getApplicationContext();
+      KeyguardManager myKM = (KeyguardManager) context
+              .getSystemService(Context.KEYGUARD_SERVICE);
+      Boolean isLocked = myKM.inKeyguardRestrictedInputMode() ? true : false;
+      successCallback.invoke(isLocked);
+    } catch (IllegalViewOperationException e) {
+      errorCallback.invoke(e.getMessage());
+    }
   }
 }
