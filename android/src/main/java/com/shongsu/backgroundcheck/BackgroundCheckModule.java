@@ -80,6 +80,23 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void clearWindow() {
+    final Activity currentActivity = getCurrentActivity();
+    currentActivity.runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        int flags = WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
+
+        Window window = currentActivity.getWindow();
+
+        window.clearFlags(flags);
+      }
+    });
+  }
+
+  @ReactMethod
   public void isLocked(Callback errorCallback, Callback successCallback) {
     try {
       Activity currentActivity = getCurrentActivity();
