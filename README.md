@@ -15,6 +15,9 @@ For Android Only
 
 1. Install
 
+  ```
+  npm install react-native-background-check
+  ```
 2. Link your native dependencies:
 
   ```
