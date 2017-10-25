@@ -32,16 +32,23 @@ import BackgroundCheckModule from 'react-native-background-check';
 #### APIs:
 
 ##### alert(String: message)
+Simple test function, call Android toast api.
 
 ##### openSettings()
+Open Android Setting page.
 
 ##### bringApptoBackground()
+Bring your app to Background, you'd better check if your app in foreground befroe you call it.
 
 ##### bringApptoForeground()
+Bring your app to Foreground, you'd better check if your app in background befroe you call it.
 
 ##### lightScreen()
+Set window flags to light your screen, and bring app over lock screen.
 
-##### isLocked(errorCallback, successCallback)
+##### clearWindow()
+Clear window flags you set in `lightScreen()`
+
 
 
 ### Example React Native Android App
