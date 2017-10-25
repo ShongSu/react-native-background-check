@@ -1,4 +1,7 @@
 # react-native-background-check
+
+[![NPM](https://nodei.co/npm/react-native-background-check.png)](https://nodei.co/npm/react-native-background-check/)
+
 For Android Only
 
 ### Content
