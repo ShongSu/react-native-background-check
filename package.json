@@ -1,6 +1,6 @@
 {
   "name": "react-native-background-check",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "For Android Only",
   "main": "index.js",
   "scripts": {
