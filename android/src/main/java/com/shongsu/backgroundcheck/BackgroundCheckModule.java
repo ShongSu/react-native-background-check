@@ -36,12 +36,14 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void openSettings() {
     Activity currentActivity = getCurrentActivity();
+    if(currectActivity == null) return;
     currentActivity.startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
   }
 
   @ReactMethod
   public void bringApptoBackground() {
     Activity currentActivity = getCurrentActivity();
+    if(currectActivity == null) return;
     Intent intent = new Intent(Intent.ACTION_MAIN);
     intent.addCategory(Intent.CATEGORY_HOME);
     currentActivity.startActivity(intent);
@@ -50,6 +52,7 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void bringApptoForeground() {
     Activity currentActivity = getCurrentActivity();
+    if(currectActivity == null) return;
     Context ctx = getReactApplicationContext();
     this.lightScreen();
     Intent intent = new Intent(ctx, currentActivity.getClass());
@@ -65,6 +68,7 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void lightScreen() {
     final Activity currentActivity = getCurrentActivity();
+    if(currectActivity == null) return;
     currentActivity.runOnUiThread(new Runnable() {
       @Override
       public void run() {
@@ -82,6 +86,7 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void clearWindow() {
     final Activity currentActivity = getCurrentActivity();
+    if(currectActivity == null) return;
     currentActivity.runOnUiThread(new Runnable() {
       @Override
       public void run() {
