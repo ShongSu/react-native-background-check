@@ -37,9 +37,6 @@ import BackgroundCheckModule from 'react-native-background-check';
 
 #### APIs:
 
-##### alert(String: message)
-Simple test function, call Android toast api.
-
 ##### openSettings()
 Open Android Setting page.
 

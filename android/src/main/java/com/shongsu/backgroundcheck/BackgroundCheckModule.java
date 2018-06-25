@@ -18,6 +18,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.uimanager.IllegalViewOperationException;
 
 public class BackgroundCheckModule extends ReactContextBaseJavaModule {
+  private static final String NULL_ACTIVITY_MESSAGE = "Activity is null";
 
   public BackgroundCheckModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -29,30 +30,34 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void alert(String message) {
-    Toast.makeText(getReactApplicationContext(), message, Toast.LENGTH_LONG).show();
-  }
-
-  @ReactMethod
-  public void openSettings() {
+  public void openSettings(Callback errorCallback, Callback successCallback) {
     Activity currentActivity = getCurrentActivity();
-    if(currentActivity == null) return;
+    if(currentActivity == null) {
+      errorCallback.invoke(NULL_ACTIVITY_MESSAGE);
+      return;
+    }
     currentActivity.startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
   }
 
   @ReactMethod
-  public void bringApptoBackground() {
+  public void bringApptoBackground(Callback errorCallback, Callback successCallback) {
     Activity currentActivity = getCurrentActivity();
-    if(currentActivity == null) return;
+    if(currentActivity == null) {
+      errorCallback.invoke(NULL_ACTIVITY_MESSAGE);
+      return;
+    }
     Intent intent = new Intent(Intent.ACTION_MAIN);
     intent.addCategory(Intent.CATEGORY_HOME);
     currentActivity.startActivity(intent);
   }
 
   @ReactMethod
-  public void bringApptoForeground() {
+  public void bringApptoForeground(Callback errorCallback, Callback successCallback) {
     Activity currentActivity = getCurrentActivity();
-    if(currentActivity == null) return;
+    if(currentActivity == null) {
+      errorCallback.invoke(NULL_ACTIVITY_MESSAGE);
+      return;
+    }
     Context ctx = getReactApplicationContext();
     this.lightScreen();
     Intent intent = new Intent(ctx, currentActivity.getClass());
@@ -66,9 +71,12 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
 
 
   @ReactMethod
-  public void lightScreen() {
+  public void lightScreen(Callback errorCallback, Callback successCallback) {
     final Activity currentActivity = getCurrentActivity();
-    if(currentActivity == null) return;
+    if(currentActivity == null) {
+      errorCallback.invoke(NULL_ACTIVITY_MESSAGE);
+      return;
+    }
     currentActivity.runOnUiThread(new Runnable() {
       @Override
       public void run() {
@@ -84,9 +92,12 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void clearWindow() {
+  public void clearWindow(Callback errorCallback, Callback successCallback) {
     final Activity currentActivity = getCurrentActivity();
-    if(currentActivity == null) return;
+    if(currentActivity == null) {
+      errorCallback.invoke(NULL_ACTIVITY_MESSAGE);
+      return;
+    }
     currentActivity.runOnUiThread(new Runnable() {
       @Override
       public void run() {
@@ -104,7 +115,10 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void isLocked(Callback errorCallback, Callback successCallback) {
     try {
-      Activity currentActivity = getCurrentActivity();
+      if(currentActivity == null) {
+        errorCallback.invoke(NULL_ACTIVITY_MESSAGE);
+        return;
+      }
       Context context = currentActivity.getApplicationContext();
       KeyguardManager myKM = (KeyguardManager) context
               .getSystemService(Context.KEYGUARD_SERVICE);
