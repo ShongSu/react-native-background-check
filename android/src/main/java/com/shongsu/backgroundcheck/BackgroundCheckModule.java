@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
+import android.os.PowerManager;
+import android.os.Build;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.NativeModule;
@@ -104,11 +106,22 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void isLocked(Callback errorCallback, Callback successCallback) {
     try {
+      boolean isLocked = false;
       Activity currentActivity = getCurrentActivity();
       Context context = currentActivity.getApplicationContext();
       KeyguardManager myKM = (KeyguardManager) context
               .getSystemService(Context.KEYGUARD_SERVICE);
-      Boolean isLocked = myKM.inKeyguardRestrictedInputMode() ? true : false;
+      boolean inKeyguardRestrictedInputMode = myKM.inKeyguardRestrictedInputMode();
+      if (inKeyguardRestrictedInputMode) {
+        isLocked = true;
+      } else {
+        PowerManager powerManager = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+          isLocked = !powerManager.isInteractive();
+        } else {
+          isLocked = !powerManager.isScreenOn();
+        }
+      }
       successCallback.invoke(isLocked);
     } catch (IllegalViewOperationException e) {
       errorCallback.invoke(e.getMessage());
